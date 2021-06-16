@@ -1,5 +1,3 @@
-local Location = {}
-
 RegisterNetEvent("dz-spawner:client:Setup")
 AddEventHandler("dz-spawner:client:Setup", function()
     SendNUIMessage({ setup = true, locations = Config.Locations })
@@ -9,23 +7,11 @@ AddEventHandler("dz-spawner:client:Setup", function()
     SendNUIMessage({ show = true })
 end)
 
-RegisterNetEvent("dz-spawner:client:GetData")
-AddEventHandler("dz-spawner:client:GetData", function(position)
-    Location.x, Location.y, Location.z = position.x, position.y, position.z
-end)
-
 ----------------------------------- https://dz-security.live ---------------------------------------------
 
 RegisterNUICallback("Preview", function(data)
-    if data.location ~= "last" then
-        local Position = Config.Locations[data.location].coords
-        PreviewSpawn(Position)
-    else
-        TriggerServerEvent("dz-spawn:server:getdata")
-        Wait(250)
-        local Position = Location
-        PreviewSpawn(Position)
-    end
+    local Position = Config.Locations[data.location].coords
+    PreviewSpawn(Position)
 end)
 
 ----------------------------------- https://dz-security.live ---------------------------------------------
@@ -33,12 +19,8 @@ end)
 RegisterNUICallback("Spawn", function(data)
     SetNuiFocus(false, false)
     SendNUIMessage({show = false})
-    if (data.spawn ~= "last") then
-        local Spawn = Config.Locations[data.spawn].coords
-        SpawnPlayer(Spawn)
-    else
-        SpawnPlayer(Location)
-    end
+    local Spawn = Config.Locations[data.spawn].coords
+    SpawnPlayer(Spawn)
 end)
 
 ----------------------------------- https://dz-security.live ---------------------------------------------
