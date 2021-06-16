@@ -22,10 +22,4 @@ Config.Locations = {
         icon = "fas fa-money-check",
         label = "Fleeca Bank",
     },
-
-    ["last"] = {
-        coords = { x = 0, y = 0, z = 0 },
-        icon = "fas fa-map-marked-alt",
-        label = "Last Location",
-    },
 }
